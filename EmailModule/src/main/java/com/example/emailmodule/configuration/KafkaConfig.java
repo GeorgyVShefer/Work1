@@ -1,6 +1,6 @@
 package com.example.emailmodule.configuration;
 
-import com.example.usermodule.entity.UserEntity;
+import com.example.util.entity.UserEntityDto;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
@@ -9,11 +9,12 @@ import org.springframework.kafka.core.ConsumerFactory;
 @Configuration
 public class KafkaConfig {
 
-    @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, UserEntity>
-    concurrentKafkaListenerContainerFactory(ConsumerFactory<String, UserEntity> consumerFactory) {
 
-        ConcurrentKafkaListenerContainerFactory<String, UserEntity> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, UserEntityDto>
+    concurrentKafkaListenerContainerFactory(ConsumerFactory<String, UserEntityDto> consumerFactory) {
+
+        ConcurrentKafkaListenerContainerFactory<String, UserEntityDto> factory = new ConcurrentKafkaListenerContainerFactory<>();
 
         factory.setConsumerFactory(consumerFactory);
 
