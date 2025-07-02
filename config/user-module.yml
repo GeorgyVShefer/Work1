@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: UserModule
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+  datasource:
+    url: jdbc:postgresql://localhost:5433/userDb
+    username: root
+    password: root
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+
+  liquibase:
+    enabled: false
+
+  data:
+    redis:
+      database: 0
+      host: localhost
+      password: "0"  # Обратите внимание: если это числовой 0, кавычки не нужны, но строковый лучше обернуть
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tagsSorter: alpha
+    operationsSorter: alpha
+  api-docs:
+    path: /api-docs
+
+server:
+  port: 8080

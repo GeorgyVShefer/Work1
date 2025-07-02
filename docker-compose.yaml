@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
   zookeeper:
@@ -21,19 +21,22 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
     ports:
       - "9092:9092"
-  user_email_db:
-    image: postgres
-    restart: always
-    environment:
-      - POSTGRES_DB=userDb
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=root
-    volumes:
-      - db:/var/lib/postgresql/data postgres
+  redis:
+    image: redis:alpine
     ports:
-      - "5433:5432"
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+networks:
+  app-network:
+    driver: bridge
+
 volumes:
   db:
+  redis_data:
+
+
 
 
 

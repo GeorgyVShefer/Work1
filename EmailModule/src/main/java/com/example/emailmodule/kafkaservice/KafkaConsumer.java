@@ -16,13 +16,14 @@ public class KafkaConsumer {
     @KafkaListener(topics = "user-events", groupId = "notification-group")
     public void consumerEvent(UserEntityDto entity){
 
+
         if (entity.getOperation().equals("Created")){
 
-            emailService.greeting();
+            emailService.greeting(entity);
         }
         else if(entity.getOperation().equals("Deleted")){
 
-            emailService.deleteMessage();
+            emailService.deleteMessage(entity);
         }
     }
 }

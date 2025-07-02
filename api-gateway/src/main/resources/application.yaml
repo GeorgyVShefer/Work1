@@ -1,0 +1,22 @@
+server:
+  port: 8089
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/  # Указывает на первый сервер
+    register-with-eureka: true
+    fetch-registry: true
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: user-service
+              uri: http://localhost:8081
+              predicates:
+                - Path=/api/users/**
+              filters:
+                - AddRequestHeader=x-request, hello

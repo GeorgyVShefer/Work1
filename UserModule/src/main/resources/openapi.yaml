@@ -1,0 +1,58 @@
+openapi: 3.0.1
+info :
+  title : Sample
+  description: API for application
+  version : 1.0
+servers:
+  - url : http://localhost:8080
+    description: Local Server
+paths:
+  /api/users:
+    get:
+      tags:
+        - Users
+      summary: Get All User
+      responses:
+        '200':
+          description: "Lis of user"
+
+      parameters:
+        - name: "page"
+          description: "Номер"
+          schema:
+            type: integer
+            default: 1
+          in: "header"
+    post:
+      tags:
+        - Users
+      summary: Create a new user
+      requestBody:
+        description: User object to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDTO'
+      responses:
+        '201':
+          description: "User created successfully"
+components:
+  schemas:
+    UserDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+          required:
+            - username
+            - email
+        password:
+          type: string
+

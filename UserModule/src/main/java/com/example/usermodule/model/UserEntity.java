@@ -13,6 +13,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
@@ -22,11 +23,12 @@ import lombok.Setter;
 @Setter
 @Builder
 @Table(name = "user_info")
+@ToString
 public class UserEntity {
 
     @Id
-    @SequenceGenerator(name = "user_info_sequence", sequenceName = "user_infoSequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_info_sequence")
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "email")
     private String email;
