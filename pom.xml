@@ -20,6 +20,7 @@
         <module>config-server</module>
         <module>api-gateway</module>
         <module>eureka-module</module>
+        <module>SecurityService</module>
     </modules>
     <name>Work1</name>
     <description>Work1</description>

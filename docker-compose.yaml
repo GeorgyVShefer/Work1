@@ -21,20 +21,25 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
     ports:
       - "9092:9092"
-  redis:
-    image: redis:alpine
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
 
+
+  db:
+    image: postgres:15-alpine
+    container_name: mapping_project_db
+    environment:
+      POSTGRES_DB: "mappingdb"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "password"
+    ports:
+      - "5432:5432"
+    networks:
+      - "app-network"
 networks:
   app-network:
     driver: bridge
 
 volumes:
   db:
-  redis_data:
 
 
 
