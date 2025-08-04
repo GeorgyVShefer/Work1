@@ -1,4 +1,4 @@
-package org.example.entity;
+package org.example.spsec.entity;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -22,14 +22,9 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name = "user")
+@Table(name = "user_credentional")
 public class UserCredentional {
 
-    public UserCredentional(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

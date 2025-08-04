@@ -1,12 +1,11 @@
-package org.example.controller;
+package org.example.spsec.controller;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.example.dto.AuthResponse;
-import org.example.dto.RegisterRequest;
-import org.example.entity.UserCredentional;
-import org.example.service.JwtUtil;
-import org.example.service.UserService;
+import org.example.spsec.dto.AuthResponse;
+import org.example.spsec.dto.RegisterRequest;
+import org.example.spsec.entity.UserCredentional;
+import org.example.spsec.service.JwtUtil;
+import org.example.spsec.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
