@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class AuthResponse {
+public class AuthRequest {
     private String accessToken;
     private String tokenType;
     private long expiresIn;

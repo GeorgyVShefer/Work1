@@ -1,5 +1,7 @@
 package org.example.spsec.service;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -8,6 +10,9 @@ import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 
@@ -16,7 +21,14 @@ public class JwtUtil {
 
     public static final String SECRET = "3c1182b6b964bd34aaa3087a639dd571acbf5c1da0cd4cef23472345dd848c5c";
 
-    public String createToken(Set<String> roles, String username){
+    public String generateToken(String username) {
+
+        Set<String> claim = new HashSet<>();
+
+        return createToken(claim, username);
+    }
+
+    public String createToken(Set<String> roles, String username) {
 
         return Jwts.builder()
                 .claim("roles", roles)
@@ -27,23 +39,26 @@ public class JwtUtil {
 
     }
 
-    private Key getSecretKey(){
+    private Key getSecretKey() {
 
         return Keys.hmacShaKeyFor(SECRET.getBytes());
     }
 
-    public boolean validateToken(String token){
+    public boolean validateToken(String token) {
 
         try {
-            Jwts.parserBuilder().setSigningKey(getSecretKey()).build().parseClaimsJws(token);
+            System.out.println(token);
+           Jwts.parserBuilder().setSigningKey(getSecretKey()).build().parseClaimsJws(token);
+
+
             return true;
-        }catch (JwtException | IllegalArgumentException ex){
+        } catch (JwtException | IllegalArgumentException ex) {
 
             return false;
         }
     }
 
-    public String getUsernameFromToken(String token){
+    public String getUsernameFromToken(String token) {
 
         return Jwts.parserBuilder().setSigningKey(getSecretKey()).build().parseClaimsJws(token).getBody().getSubject();
     }
