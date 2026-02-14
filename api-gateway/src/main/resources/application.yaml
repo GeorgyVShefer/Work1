@@ -20,3 +20,18 @@ spring:
                 - Path=/api/users/**
               filters:
                 - AddRequestHeader=x-request, hello
+            - id: security-service
+              uri: http://localhost:9191
+              predicates:
+                - Path=/auth/**
+              filters:
+                - AddRequestHeader=x-request, hello
+resilience4j:
+  circuitbreaker:
+    instances:
+      securityServiceBreaker:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
